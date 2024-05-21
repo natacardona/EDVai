@@ -1,4 +1,1 @@
-# EDVai Escuela de datos vivos
-# https://www.escueladedatosvivos.ai/
-
-# Bootcamp Data engineer
+# EDVai Escuela de datos vivos Bootcamp Data engineer https://www.escueladedatosvivos.ai/
