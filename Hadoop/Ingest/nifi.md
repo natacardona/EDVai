@@ -57,6 +57,10 @@ c) Tomar nuevamente el archivo, ahora desde /home/nifi/bucket
 d) Ingestarlo en HDFS/nifi (si es necesario, crear el directorio con hdfs dfs -mkdir
 /nifi )
 
+
+# Flujo de processors en nifi
+![Nifi ETL](https://github.com/natacardona/EDVai/blob/main/Hadoop/Ingest/Nifi_ETL.png)
+
 # Visualizando el resultado de la ingesta en el HDFS
 ```
 hadoop@d4437f61daec:/$ hdfs dfs -ls /nifi
@@ -65,4 +69,3 @@ Found 2 items
 -rw-r--r--   1 nifi supergroup       5462 2024-05-22 21:04 /nifi/starwars.csv
 hadoop@d4437f61daec:/$ 
 ```
-![Nifi ETL](https://github.com/natacardona/EDVai/blob/main/Hadoop/Ingest/Nifi_ETL.png)
