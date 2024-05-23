@@ -65,3 +65,4 @@ Found 2 items
 -rw-r--r--   1 nifi supergroup       5462 2024-05-22 21:04 /nifi/starwars.csv
 hadoop@d4437f61daec:/$ 
 ```
+![Nifi ETL](https://github.com/natacardona/EDVai/blob/main/Hadoop/Ingest/Nifi_ETL.png)
