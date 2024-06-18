@@ -37,9 +37,13 @@ https://edvaibucket.blob.core.windows.net/data-engineer-edvai/aeropuertos_detall
 (2021-informe-ministerio.csv y 202206-informe-ministerio) y otra tabla para el detalle de
 los aeropuertos (aeropuertos_detalle.csv)
 
-Schema Tabla 1:
 
-Schema Tabla 2:
+![Schema Tabla 1:](https://github.com/natacardona/EDVai/blob/d4b4195277776a22743a1bd0d5c2e36222c9b744/Examen%20Final/Ejercicio_1/Images/Schema_Vuelos.png)
+
+![Schema Tabla 2:](https://github.com/natacardona/EDVai/blob/d4b4195277776a22743a1bd0d5c2e36222c9b744/Examen%20Final/Ejercicio_1/Images/Schema_Detalle_Aeropuertos.png)
+
+
+
 
 
 
