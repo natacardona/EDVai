@@ -18,7 +18,7 @@ https://datos.transporte.gob.ar/dataset/lista-aeropuertos
 
 # Para este punto vamos a utilizar esta arquitectura propuesta:
 
-![Arquitectura:](https://github.com/natacardona/EDVai/blob/main/Examen%20Final/Ejercicio_1/Images/Arquitectura.png)
+![Arquitectura:](https://github.com/natacardona/EDVai/blob/main/FinalExam/Images/Arquitectura.png)
 
 
 ## <p aling="center"><b>TAREAS</b></p>
@@ -39,9 +39,9 @@ https://edvaibucket.blob.core.windows.net/data-engineer-edvai/aeropuertos_detall
 los aeropuertos (aeropuertos_detalle.csv)
 
 
-![Schema Tabla 1:](https://github.com/natacardona/EDVai/blob/d4b4195277776a22743a1bd0d5c2e36222c9b744/Examen%20Final/Ejercicio_1/Images/Schema_Vuelos.png)
+![Schema Tabla 1:](https://github.com/natacardona/EDVai/blob/main/FinalExam/Images/Schema_Vuelos.png)
 
-![Schema Tabla 2:](https://github.com/natacardona/EDVai/blob/d4b4195277776a22743a1bd0d5c2e36222c9b744/Examen%20Final/Ejercicio_1/Images/Schema_Detalle_Aeropuertos.png)
+![Schema Tabla 2:](https://github.com/natacardona/EDVai/blob/main/FinalExam/Images/Schema_Detalle_Aeropuertos.png)
 
 Creamos las siguientes tablas en Hive 
 
