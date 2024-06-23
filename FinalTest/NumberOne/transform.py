@@ -14,15 +14,12 @@ file_details = 'hdfs://172.17.0.2:9000/ingest/aeropuertos_detalle.csv'
 # Leer los archivos CSV especificando el delimitador
 df_2021 = spark.read.option("delimiter", ";").option("header", "true").csv(file_2021)
 df_2022 = spark.read.option("delimiter", ";").option("header", "true").csv(file_2022)
-df_details = spark.read.option("delimiter", ";").option("header", "true").csv(file_details)
 
 # Mostrar las columnas de cada archivo
 print("Columnas del archivo 2021:")
 df_2021.printSchema()
 print("\nColumnas del archivo 2022:")
 df_2022.printSchema()
-print("\nColumnas del archivo de detalles:")
-df_details.printSchema()
 
 # Unir los datos de 2021 y 2022
 df_union = df_2021.unionByName(df_2022)
