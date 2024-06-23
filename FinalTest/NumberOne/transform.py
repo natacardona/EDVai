@@ -25,7 +25,7 @@ df_2022.printSchema()
 df_union = df_2021.unionByName(df_2022)
 
 # Eliminar columnas que no se utilizarán para el análisis
-columns_to_drop = ["inhab", "fir", "Calidad dato"]
+columns_to_drop = ["Calidad dato"]
 df_union = df_union.drop(*columns_to_drop)
 
 # Filtrar los vuelos domésticos (asumiendo que hay una columna 'Clasificación Vuelo')
@@ -33,7 +33,6 @@ df_domestic = df_union.filter(col('Clasificación Vuelo') == 'Doméstico')
 
 # Convertir valores NULL en 0 en las columnas 'Pasajeros' y 'distancia_ref'
 df_domestic = df_domestic.withColumn('Pasajeros', when(col('Pasajeros').isNull(), 0).otherwise(col('Pasajeros').cast("int")))
-df_details = df_details.withColumn('distancia_ref', when(col('distancia_ref').isNull(), 0).otherwise(col('distancia_ref').cast("int")))
 
 # Mostrar tipos de datos de las columnas
 print("Tipos de datos de las columnas:")
@@ -80,6 +79,7 @@ df_domestic.show(5)
 
 # Crear una vista temporal
 df_domestic.createOrReplaceTempView("tmp_flights_data")
- 
+
+# Insertamos datos. 
 hc.sql("insert into fligthsdb.vuelos select * from tmp_flights_data")
 

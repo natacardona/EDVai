@@ -2,4 +2,6 @@
 .DS_Store
 /FinalTest/NumberOne/ingest_aviation_local.sh
 /FinalTest/NumberOne/transform_local.py
+/FinalTest/NumberOne/transform_second_local.py
 mysql-connector-java-8.0.23.jar
+.vscode
