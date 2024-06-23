@@ -1,3 +1,5 @@
 /FinalTest/NumberOne/airflow
 .DS_Store
 /FinalTest/NumberOne/ingest_aviation_local.sh
+/FinalTest/NumberOne/Images/transform_local.py
+mysql-connector-java-8.0.23.jar
