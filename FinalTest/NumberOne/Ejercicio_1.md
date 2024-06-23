@@ -76,7 +76,11 @@ CREATE TABLE detalle_aeropuertos (
     condicion STRING,
     control STRING,
     region STRING,
-    uso STRING
+    uso STRING,
+    trafico STRING,
+    sna STRING,
+    concesionado STRING,
+    provincia STRING,
 );
 ```
 hive> create database fligthsdb;
