@@ -3,5 +3,6 @@
 /FinalTest/NumberOne/ingest_aviation_local.sh
 /FinalTest/NumberOne/transform_local.py
 /FinalTest/NumberOne/transform_second_local.py
+/FinalTest/NumberTwo/ingest_cars_local.sh
 mysql-connector-java-8.0.23.jar
 .vscode
