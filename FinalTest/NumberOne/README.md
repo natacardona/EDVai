@@ -318,7 +318,7 @@ hive>
 ## 7. Cantidad de pasajeros que viajaron en Aerolíneas Argentinas entre el 01/01/2021 y 30/06/2022. Mostrar consulta y Resultado de la query
 ---
 
-![Quey 2](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Passenger_count_by_airlines_number_nine.png)
+![Quey 2](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Aerolineas_passenger_quantity_seven.png)
 
 ---
 ## 8. Mostrar fecha, hora, código aeropuerto salida, ciudad de salida, código de aeropuerto de arribo, ciudad de arribo, y cantidad de pasajeros de cada vuelo, entre el 01/01/2022 y el 30/06/2022 ordenados por fecha de manera descendiente. Mostrar consulta y Resultado de la query
