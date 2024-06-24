@@ -168,31 +168,32 @@ El archivo aeropuertos_detalle.csv → en la tabla aeropuerto_detalles_tabla
    - Eliminar la columna `inhab` ya que no se utilizará para el análisis.
    - Eliminar la columna `fir` ya que no se utilizará para el análisis.
 
-    ```
+```
     df_airport = df_airport_details.drop('inhab', 'fir')
     df_airports_fixed = df_airport.fillna({"distancia_ref": 0})
-    ``
+```
    - Eliminar la columna `calidad del dato` ya que no se utilizará para el análisis.
-    ```
+    
+```
     # Eliminar columnas que no se utilizarán para el análisis
-    ```
     columns_to_drop = ["Calidad dato"]
     df_union = df_union.drop(*columns_to_drop)
-    ```
+```
    - Filtrar los vuelos internacionales, ya que solamente se analizarán los vuelos domésticos.
-    ```
+```
     # Filtrar los vuelos domésticos 'Clasificación Vuelo')
     df_domestic = df_union.filter(col('Clasificación Vuelo') == 'Doméstico')
-    ```
+```
    - En el campo `pasajeros`, si se encuentran campos en Null, convertirlos en 0 (cero).
-    ```
-   # Convertir valores NULL en 0 en las columnas 'Pasajeros' y 'distancia_ref'
+    
+```
+    # Convertir valores NULL en 0 en las columnas 'Pasajeros' y 'distancia_ref'
     df_domestic = df_domestic.withColumn('Pasajeros', when(col('Pasajeros').isNull(), 0).otherwise(col('Pasajeros').cast("int")))
-    ```
+```
    - En el campo `distancia_ref`, si se encuentran campos en Null, convertirlos en 0 (cero).
-     ```
-    df_airports_fixed = df_airport.fillna({"distancia_ref": 0})
-     ```
+```
+     df_airports_fixed = df_airport.fillna({"distancia_ref": 0})
+```
 ---
 
 ## 5. Mostrar mediante una impresión de pantalla, que los tipos de campos de las tablas sean los solicitados en el datawarehouse (ej: fecha date, aeronave string, pasajeros integer, etc.)
