@@ -335,10 +335,94 @@ hive>
 
 
 ## 11. Qué datos externos agregaría en este dataset que mejoraría el análisis de los datos
+
+Para enriquecer el análisis de los datos existentes en el dataset y mejorar la capacidad de generar insights más profundos, consideraría agregar los siguientes tipos de datos externos:
+
+- Información meteorológica detallada: Agregar datos sobre las condiciones climáticas, como temperatura, precipitación, y velocidad del viento en el aeropuerto de origen y destino para cada vuelo. Esto puede ayudar a analizar cómo las condiciones meteorológicas afectan los retrasos de vuelos, las cancelaciones y la duración del vuelo.
+
+- Datos sobre eventos significativos: Información sobre eventos locales importantes (como festivales, conferencias, eventos deportivos) que podrían influir en el volumen de pasajeros y la demanda de vuelos en ciertas fechas y regiones.
+
+- Datos económicos y de población: Agregar información sobre la economía y la población de las ciudades de los aeropuertos para entender mejor los patrones de tráfico aéreo relacionados con el tamaño y la actividad económica de la región.
+
+- Información sobre el mantenimiento de las aeronaves: Datos sobre la última fecha de mantenimiento de cada aeronave y el tipo de mantenimiento realizado podrían proporcionar insights sobre la seguridad y la eficiencia operacional.
+
+- Tarifas de vuelo y promociones: Datos sobre las tarifas de los vuelos y las promociones ofrecidas podrían ayudar a entender mejor la estrategia de precios de las aerolíneas y su impacto en la ocupación de los vuelos.
+
+- Índices de satisfacción del cliente y reseñas: Incorporar datos sobre la satisfacción del cliente y reseñas para cada vuelo o aerolínea podría permitir analizar la relación entre la experiencia del pasajero y la lealtad o elección de aerolíneas.
+
+- Datos sobre el tráfico aéreo global: Integrar datos sobre la situación del tráfico aéreo global puede ofrecer una perspectiva sobre cómo los eventos internacionales (como pandemias o crisis económicas) afectan el tráfico local y regional.
+
+- Regulaciones aeroportuarias y cambios en políticas: La información sobre nuevas regulaciones o políticas (como cambios en las reglas de seguridad, nuevas tasas aeroportuarias, o restricciones de viaje) puede afectar el flujo de pasajeros y operaciones en los aeropuertos.
+
+- Datos de competencia entre aerolíneas: Información sobre rutas, frecuencias y capacidades ofrecidas por diferentes aerolíneas en rutas similares puede ayudar a analizar la competencia y estrategia de mercado entre ellas.
+
+- Impacto de las redes sociales y campañas de marketing: Analizar el efecto de las campañas de marketing y la presencia en redes sociales en la demanda de vuelos puede ofrecer insights sobre la eficacia de diferentes estrategias de marketing.
+
+- Desarrollos infraestructurales: Información sobre construcciones o mejoras en la infraestructura de los aeropuertos y sus alrededores, como nuevas terminales, mejoras en el transporte terrestre, o expansión de servicios, que pueden influir en la capacidad del aeropuerto y la comodidad del pasajero.
+
+- Información de seguimiento de vuelos en tiempo real: Datos en tiempo real sobre el estado de los vuelos (retrasados, en tiempo, cancelados) proporcionan una base para análisis operativos y pueden ayudar a identificar patrones de interrupciones.
+
+Estos datos pueden ayudar a hacer análisis más robustos y contextuales, lo que resulta en una comprensión más profunda de los factores que influyen en el tráfico aéreo y la experiencia del pasajero.
+
 ---
 ## 12. Elabore sus conclusiones y recomendaciones sobre este proyecto.
+
+Este proyecto representa un flujo de trabajo de procesamiento de datos robusto y escalable que integra varias tecnologías líderes en el ámbito de big data para la ingestión, almacenamiento, procesamiento y visualización de datos. Podemos realizar una breve descripción de cada paso y las tecnologías involucradas:
+
+- Ingesta de Datos con Apache Airflow: Utilizar Airflow para orquestar y automatizar la ingesta de datos asegura que los procesos sean reproducibles y fáciles de monitorear. Airflow ofrece la flexibilidad de programar y manejar dependencias en complejas cadenas de procesamiento de datos, lo que lo hace ideal para este propósito.
+
+- Almacenamiento en HDFS: Al almacenar los datos ingesados en HDFS, el sistema se beneficia de un sistema de archivos distribuido que ofrece alta disponibilidad y escalabilidad, crucial para manejar grandes volúmenes de datos y soportar operaciones de alto rendimiento.
+
+- Procesamiento con Apache Spark: Spark es conocido por su capacidad para procesar grandes conjuntos de datos de forma rápida gracias a su procesamiento en memoria. Es ideal para realizar transformaciones complejas y análisis en grandes datasets, como los típicos en entornos de big data.
+
+- Almacenamiento y consulta en Apache Hive: Hive proporciona una capa de abstracción SQL sobre Hadoop, facilitando consultas complejas, la gestión de datos y optimización de consultas sobre grandes volúmenes de datos, lo que facilita la integración con herramientas de BI y visualización.
+
+- Visualización con Looker: La integración con Looker para la visualización de datos permite convertir los datos procesados en insights accionables a través de dashboards interactivos y reportes. Looker soporta la toma de decisiones basada en datos al proporcionar una interfaz accesible y flexible para explorar los datos.
+
+Conclusión
+El proyecto combina tecnologías de vanguardia para construir un pipeline de datos end-to-end que no solo es eficiente en términos de procesamiento y escalabilidad, sino que también facilita una toma de decisiones informada a través de visualizaciones avanzadas. Esta arquitectura no solo es robusta y eficiente, sino que también es flexible, permitiendo futuras expansiones o modificaciones según las necesidades del negocio cambien o crezcan. Al implementar este tipo de arquitectura, la organización está bien posicionada para manejar grandes volúmenes de datos de manera efectiva y obtener insights valiosos a partir de estos, apoyando así una amplia gama de decisiones comerciales y operativas.
+
 ---
+
 ## 13. Proponer una arquitectura alternativa para este proceso ya sea con herramientas on premise o cloud (Sí aplica)
+
+una arquitectura alternativa que utilice tanto soluciones on-premise como en la nube, centrándonos en maximizar la eficiencia, escalabilidad y la capacidad de manejar grandes volúmenes de datos de manera efectiva. Se podría proponer una propuesta que incorpore tecnologías de vanguardia tanto en la nube como en entornos locales:
+
+Arquitectura Híbrida en la Nube y On-Premise
+
+### Ingesta de Datos - Apache NiFi/Kafka:
+
+- On-Premise: Utiliza Apache NiFi para la ingestión de datos. NiFi es excelente para la automatización de flujos de datos, con capacidades robustas para la recopilación, transformación y distribución de datos en tiempo real.
+- Cloud: Apache Kafka puede ser utilizado para manejar flujos de datos en tiempo real, proporcionando un sistema de mensajería distribuido que es altamente escalable y permite un manejo eficiente de los flujos de entrada.
+
+### Procesamiento de Datos - Apache Flink/Google Cloud Dataflow:
+
+- On-Premise: Apache Flink para procesamiento de flujos de datos en tiempo real. Flink es conocido por su bajo latencia y capacidades de procesamiento en tiempo real.
+- Cloud: Google Cloud Dataflow, una plataforma gestionada que simplifica la creación de pipelines de procesamiento de datos, tanto en lotes como en tiempo real.
+
+### Almacenamiento de Datos - Google Cloud Bigtable/Apache HBase:
+
+- On-Premise: Apache HBase, una base de datos NoSQL que proporciona lectura/escritura en tiempo real sobre grandes datasets.
+- Cloud: Google Cloud Bigtable, altamente escalable y performante para aplicaciones de análisis y operacionales.
+
+### Almacenamiento y Consulta de Datos - Google BigQuery/Apache Hive:
+
+- On-Premise: Continuar con Apache Hive para consultas basadas en SQL sobre grandes datasets en Hadoop.
+- Cloud: Google BigQuery para análisis de datos y ejecución de consultas SQL a gran escala, ofreciendo un almacén de datos serverless y altamente escalable.
+
+### Visualización de Datos - Tableau/Google Data Studio:
+
+- On-Premise: Tableau para visualizaciones avanzadas, conectándose directamente a HBase o Hive para obtener insights en tiempo real.
+- Cloud: Google Data Studio, que se integra perfectamente con BigQuery y otras fuentes de datos en Google Cloud para crear dashboards interactivos y compartir insights fácilmente.
+
+### Consideraciones de la Arquitectura
+
+- Escalabilidad y Flexibilidad: La combinación de componentes en la nube y on-premise proporciona una solución flexible que puede escalar según las necesidades de procesamiento y almacenamiento de datos.
+- Costo y Rendimiento: Cada componente ha sido seleccionado para equilibrar el costo y el rendimiento, maximizando la eficiencia operativa y reduciendo la latencia.
+- Seguridad y Conformidad: Esta arquitectura permite a las organizaciones cumplir con requisitos específicos de seguridad y regulaciones locales al mantener ciertos datos sensibles on-premise mientras se aprovecha la escalabilidad y las capacidades avanzadas de la nube.
+
+Esta arquitectura híbrida proporciona una solución robusta y adaptable que puede manejar diversas cargas de trabajo de procesamiento de datos, desde el análisis en tiempo real hasta el procesamiento de grandes volúmenes de datos históricos, todo ello manteniendo opciones de alta disponibilidad y recuperación ante desastres.
+
 ---
 
 Visualizaciones: https://lookerstudio.google.com/s/uT7r6C9b1P0
