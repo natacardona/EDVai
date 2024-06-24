@@ -4,5 +4,6 @@
 /FinalTest/NumberOne/transform_local.py
 /FinalTest/NumberOne/transform_second_local.py
 /FinalTest/NumberTwo/ingest_cars_local.sh
+/FinalTest/NumberTwo/transform_car_rentals_local.py
 mysql-connector-java-8.0.23.jar
 .vscode
