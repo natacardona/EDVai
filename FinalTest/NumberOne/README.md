@@ -2,6 +2,8 @@
 
 ### Aviación Civil
 
+## Requerimiento:
+
 La Administración Nacional de Aviación Civil necesita una serie de informes para elevar al
 ministerio de transporte acerca de los aterrizajes y despegues en todo el territorio Argentino,<b> como puede ser:* </b> cuales aviones son los que más volaron, cuántos pasajeros volaron, ciudades
 de partidas y aterrizajes entre fechas determinadas, etc.
@@ -24,7 +26,7 @@ https://datos.transporte.gob.ar/dataset/lista-aeropuertos
 ## <p aling="center"><b>TAREAS</b></p>
 ### 1. Hacer ingest de los siguientes files relacionados con transporte aéreo de Argentina :
 
-## Requerimiento:
+
 #### 2021:
 https://edvaibucket.blob.core.windows.net/data-engineer-edvai/2021-informe-ministerio.csv?sp=r&st=2023-11-06T12:59:46Z&se=2025-11-06T20:59:46Z&sv=2022-11-02&sr=b&sig=%2BSs5xIW3qcwmRh5TTmheIY9ZBa9BJC8XQDcI%2FPLRe9Y%3D
 
@@ -36,19 +38,14 @@ https://edvaibucket.blob.core.windows.net/data-engineer-edvai/aeropuertos_detall
 
 ## Solución:
 
-[Ingest.sh](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/ingest.sh)
+[Ingest](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/ingest.sh)
 
-### 2. Crear 2 tablas en el datawarehouse, una para los vuelos realizados en 2021 y 2022
-(2021-informe-ministerio.csv y 202206-informe-ministerio) y otra tabla para el detalle de
-los aeropuertos (aeropuertos_detalle.csv)
-
-## Requerimiento:
+### 2. Crear 2 tablas en el datawarehouse, una para los vuelos realizados en 2021 y 2022(2021-informe-ministerio.csv y 202206-informe-ministerio) y otra tabla para el detalle delos aeropuertos (aeropuertos_detalle.csv)
 
 ![Schema Tabla 1:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Schema_Vuelos.png)
 
 ![Schema Tabla 2:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Schema_Detalle_Aeropuertos.png)
 
-## Solución:
 Creamos las siguientes tablas en Hive 
 
 ```
@@ -89,14 +86,18 @@ CREATE TABLE detalle_aeropuertos (
     provincia STRING,
 );
 ```
+
 ```
 hive> create database fligthsdb;
 OK
 ```
+
 ```
 hive> use fligthsdb;
 OK
 Time taken: 0.045 seconds
+```
+
 ```
 hive> 
     > CREATE TABLE vuelos (
@@ -114,6 +115,7 @@ hive>
 OK
 Time taken: 1.728 seconds
 hive> 
+```
 ```
 hive> CREATE TABLE detalle_aeropuertos (
     >     aeropuerto STRING,
@@ -142,21 +144,18 @@ OK
 Time taken: 0.411 seconds
 hive> 
 ```
-## 3. Realizar un proceso automático orquestado por airflow que ingeste los archivos
-## Requerimiento:
-previamente mencionados entre las fechas 01/01/2021 y 30/06/2022 en las dos
-columnas creadas.
+## 3. Realizar un proceso automático orquestado por airflow que ingeste los archivos previamente mencionados entre las fechas 01/01/2021 y 30/06/2022 en las dos columnas creadas.
+
 Los archivos 202206-informe-ministerio.csv y 202206-informe-ministerio.csv → en la
 tabla aeropuerto_tabla
 El archivo aeropuertos_detalle.csv → en la tabla aeropuerto_detalles_tabla
 
-## Solución:
 ![Orchestador:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Airflow_Dag_Graph_Excersise_One.png)
 
+[DAG](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/dag_first_exercise.py)
 
-## 5. Mostrar mediante una impresión de pantalla, que los tipos de campos de las tablas
-sean los solicitados en el datawarehouse (ej: fecha date, aeronave string, pasajeros
-integer, etc.)
+## 5. Mostrar mediante una impresión de pantalla, que los tipos de campos de las tablas sean los solicitados en el datawarehouse (ej: fecha date, aeronave string, pasajeros integer, etc.)
+
 ```
 hive> describe formatted vuelos;
 OK
