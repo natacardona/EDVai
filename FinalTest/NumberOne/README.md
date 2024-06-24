@@ -15,13 +15,14 @@ hacer sus recomendaciones con respecto al estado actual.
 https://datos.gob.ar/lv/dataset/transporte-aterrizajes-despegues-procesados-por-administracionnacional-
 
 #### aviacion-civil-anac
-Listado de detalles de aeropuertos de Argentina:
+#### Listado de detalles de aeropuertos de Argentina:
 https://datos.transporte.gob.ar/dataset/lista-aeropuertos
 
 # Para este punto vamos a utilizar esta arquitectura propuesta:
 
 ![Arquitectura:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Arquitectura.png)
 
+---
 
 ## <p aling="center"><b>TAREAS</b></p>
 ### 1. Hacer ingest de los siguientes files relacionados con transporte aéreo de Argentina :
@@ -144,15 +145,55 @@ OK
 Time taken: 0.411 seconds
 hive> 
 ```
+---
 ## 3. Realizar un proceso automático orquestado por airflow que ingeste los archivos previamente mencionados entre las fechas 01/01/2021 y 30/06/2022 en las dos columnas creadas.
 
 Los archivos 202206-informe-ministerio.csv y 202206-informe-ministerio.csv → en la
 tabla aeropuerto_tabla
 El archivo aeropuertos_detalle.csv → en la tabla aeropuerto_detalles_tabla
 
+[DAG:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/dag_first_exercise.py)
+
 ![Orchestador:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Airflow_Dag_Graph_Excersise_One.png)
 
-[DAG](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/dag_first_exercise.py)
+---
+## 4. Realizar las siguientes transformaciones en los pipelines de datos:
+  
+   ## Solución:
+
+[Transform_airports:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/transform_airports.py)
+
+[transform_flights:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/transform_flights.py)
+
+   - Eliminar la columna `inhab` ya que no se utilizará para el análisis.
+   - Eliminar la columna `fir` ya que no se utilizará para el análisis.
+
+    ```
+    df_airport = df_airport_details.drop('inhab', 'fir')
+    df_airports_fixed = df_airport.fillna({"distancia_ref": 0})
+    ``
+   - Eliminar la columna `calidad del dato` ya que no se utilizará para el análisis.
+    ```
+    # Eliminar columnas que no se utilizarán para el análisis
+    ```
+    columns_to_drop = ["Calidad dato"]
+    df_union = df_union.drop(*columns_to_drop)
+    ```
+   - Filtrar los vuelos internacionales, ya que solamente se analizarán los vuelos domésticos.
+    ```
+    # Filtrar los vuelos domésticos 'Clasificación Vuelo')
+    df_domestic = df_union.filter(col('Clasificación Vuelo') == 'Doméstico')
+    ```
+   - En el campo `pasajeros`, si se encuentran campos en Null, convertirlos en 0 (cero).
+    ```
+   # Convertir valores NULL en 0 en las columnas 'Pasajeros' y 'distancia_ref'
+    df_domestic = df_domestic.withColumn('Pasajeros', when(col('Pasajeros').isNull(), 0).otherwise(col('Pasajeros').cast("int")))
+    ```
+   - En el campo `distancia_ref`, si se encuentran campos en Null, convertirlos en 0 (cero).
+     ```
+    df_airports_fixed = df_airport.fillna({"distancia_ref": 0})
+     ```
+---
 
 ## 5. Mostrar mediante una impresión de pantalla, que los tipos de campos de las tablas sean los solicitados en el datawarehouse (ej: fecha date, aeronave string, pasajeros integer, etc.)
 

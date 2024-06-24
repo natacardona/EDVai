@@ -27,7 +27,7 @@ df_union = df_2021.unionByName(df_2022)
 columns_to_drop = ["Calidad dato"]
 df_union = df_union.drop(*columns_to_drop)
 
-# Filtrar los vuelos domésticos (asumiendo que hay una columna 'Clasificación Vuelo')
+# Filtrar los vuelos domésticos 'Clasificación Vuelo')
 df_domestic = df_union.filter(col('Clasificación Vuelo') == 'Doméstico')
 
 # Convertir valores NULL en 0 en las columnas 'Pasajeros' y 'distancia_ref'
