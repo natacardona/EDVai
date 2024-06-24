@@ -340,3 +340,5 @@ hive>
 ---
 ## 13. Proponer una arquitectura alternativa para este proceso ya sea con herramientas on premise o cloud (Sí aplica)
 ---
+
+Visualizaciones: https://lookerstudio.google.com/s/uT7r6C9b1P0
