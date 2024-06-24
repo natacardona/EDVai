@@ -18,7 +18,7 @@ https://datos.transporte.gob.ar/dataset/lista-aeropuertos
 
 # Para este punto vamos a utilizar esta arquitectura propuesta:
 
-![Arquitectura:](https://github.com/natacardona/EDVai/blob/main/Examen%20Final/Ejercicio_1/Images/Arquitectura.png)
+![Arquitectura:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Arquitectura.png)
 
 
 ## <p aling="center"><b>TAREAS</b></p>
@@ -39,9 +39,9 @@ https://edvaibucket.blob.core.windows.net/data-engineer-edvai/aeropuertos_detall
 los aeropuertos (aeropuertos_detalle.csv)
 
 
-![Schema Tabla 1:](https://github.com/natacardona/EDVai/blob/d4b4195277776a22743a1bd0d5c2e36222c9b744/Examen%20Final/Ejercicio_1/Images/Schema_Vuelos.png)
+![Schema Tabla 1:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Schema_Vuelos.png)
 
-![Schema Tabla 2:](https://github.com/natacardona/EDVai/blob/d4b4195277776a22743a1bd0d5c2e36222c9b744/Examen%20Final/Ejercicio_1/Images/Schema_Detalle_Aeropuertos.png)
+![Schema Tabla 2:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Schema_Detalle_Aeropuertos.png)
 
 Creamos las siguientes tablas en Hive 
 
@@ -83,12 +83,15 @@ CREATE TABLE detalle_aeropuertos (
     provincia STRING,
 );
 ```
+```
 hive> create database fligthsdb;
 OK
-
+```
+```
 hive> use fligthsdb;
 OK
 Time taken: 0.045 seconds
+```
 hive> 
     > CREATE TABLE vuelos (
     >     fecha DATE,
@@ -105,7 +108,7 @@ hive>
 OK
 Time taken: 1.728 seconds
 hive> 
-
+```
 hive> CREATE TABLE detalle_aeropuertos (
     >     aeropuerto STRING,
     >     oac STRING,
@@ -124,15 +127,28 @@ hive> CREATE TABLE detalle_aeropuertos (
     >     control STRING,
     >     region STRING,
     >     uso STRING
+    >     trafico STRING,
+    >     sna STRING,
+    >     concesionado STRING,
+    >     provincia STRING    
     > );
 OK
 Time taken: 0.411 seconds
 hive> 
+```
+3. Realizar un proceso automático orquestado por airflow que ingeste los archivos
+previamente mencionados entre las fechas 01/01/2021 y 30/06/2022 en las dos
+columnas creadas.
+Los archivos 202206-informe-ministerio.csv y 202206-informe-ministerio.csv → en la
+tabla aeropuerto_tabla
+El archivo aeropuertos_detalle.csv → en la tabla aeropuerto_detalles_tabla
+
+![Orchestador:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Airflow_Dag_Graph_Excersise_One.png)
 
 5. Mostrar mediante una impresión de pantalla, que los tipos de campos de las tablas
 sean los solicitados en el datawarehouse (ej: fecha date, aeronave string, pasajeros
 integer, etc.)
-
+```
 hive> describe formatted vuelos;
 OK
 # col_name            	data_type           	comment             
@@ -176,7 +192,9 @@ Storage Desc Params:
 	serialization.format	1                   
 Time taken: 0.503 seconds, Fetched: 39 row(s)
 hive> 
+```
 
+```
 hive> describe formatted detalle_aeropuertos;
 OK
 # col_name            	data_type           	comment             
@@ -197,7 +215,12 @@ direccion_ref       	string
 condicion           	string              	                    
 control             	string              	                    
 region              	string              	                    
-uso                 	string              	                    
+uso                 	string
+trafico                 string
+sna                     string
+concesionado            string
+provincia               string
+
 	 	 
 # Detailed Table Information	 	 
 Database:           	fligthsdb           	 
@@ -226,7 +249,8 @@ Sort Columns:       	[]
 Storage Desc Params:	 	 
 	serialization.format	1                   
 Time taken: 0.176 seconds, Fetched: 46 row(s)
-
+```
+```
 hive> show tables;
 OK
 detalle_aeropuertos
@@ -234,6 +258,8 @@ vuelos
 Time taken: 0.199 seconds, Fetched: 2 row(s)
 hive> 
 
+
+```
 Crear el archivo ingest_aviation.sh que nos permita descargar los archivos mencionados abajo e ingestarlos en HDFS.
 
 hadoop@d4437f61daec:~/scripts$ ./ingest_aviation.sh 
