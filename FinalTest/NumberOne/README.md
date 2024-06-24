@@ -26,8 +26,8 @@ https://datos.transporte.gob.ar/dataset/lista-aeropuertos
 
 ## <p aling="center"><b>TAREAS</b></p>
 ---
+
 ### 1. Hacer ingest de los siguientes files relacionados con transporte aéreo de Argentina :
----
 
 #### 2021:
 https://edvaibucket.blob.core.windows.net/data-engineer-edvai/2021-informe-ministerio.csv?sp=r&st=2023-11-06T12:59:46Z&se=2025-11-06T20:59:46Z&sv=2022-11-02&sr=b&sig=%2BSs5xIW3qcwmRh5TTmheIY9ZBa9BJC8XQDcI%2FPLRe9Y%3D
@@ -42,7 +42,9 @@ https://edvaibucket.blob.core.windows.net/data-engineer-edvai/aeropuertos_detall
 Se creo un archivo que de ingest que descarga los archivos a un directorio de landing y luego mueve los archivos al HDFS.
 
 [Ingest.sh](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/ingest.sh)
+
 ---
+
 ### 2. Crear 2 tablas en el datawarehouse, una para los vuelos realizados en 2021 y 2022(2021-informe-ministerio.csv y 202206-informe-ministerio) y otra tabla para el detalle delos aeropuertos (aeropuertos_detalle.csv)
 ---
 ![Schema Tabla 1:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Files/Schema_Vuelos.png)
@@ -148,14 +150,16 @@ Time taken: 0.411 seconds
 hive> 
 ```
 ---
+
 ## 3. Realizar un proceso automático orquestado por airflow que ingeste los archivos previamente mencionados entre las fechas 01/01/2021 y 30/06/2022 en las dos columnas creadas.Los archivos 202206-informe-ministerio.csv y 202206-informe-ministerio.csv → en latabla aeropuerto_tabla El archivo aeropuertos_detalle.csv → en la tabla aeropuerto_detalles_tabla
 
-Se creo un orquestador 
-[dag_first_exercise.py:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/dag_first_exercise.py)
+- Se crea un orquestador 
+[dag_first_exercise.py](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/dag_first_exercise.py)
 
-![Evidencia Orchestador en Airflow:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Airflow_Dag_Graph_Excersise_One.png)
+- ![Evidencia Orchestador en Airflow](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Files/Airflow_Dag_Graph_Excersise_One.png)
 
 ---
+
 ## 4. Realizar las siguientes transformaciones en los pipelines de datos:
 
 #### Scripting de transformación
@@ -193,9 +197,11 @@ Se creo un orquestador
 ```
      df_airports_fixed = df_airport.fillna({"distancia_ref": 0})
 ```
+
 ---
+
 ## 5. Mostrar mediante una impresión de pantalla, que los tipos de campos de las tablas sean los solicitados en el datawarehouse (ej: fecha date, aeronave string, pasajeros integer, etc.)
----
+
 
 ```
 hive> describe formatted vuelos;
@@ -307,31 +313,38 @@ vuelos
 Time taken: 0.199 seconds, Fetched: 2 row(s)
 hive> 
 ```
+
 ---
+
 ## 6. Determinar la cantidad de vuelos entre las fechas 01/12/2021 y 31/01/2022. Mostrar consulta y Resultado de la query
 
 ![Quey 1:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Files/Flights_count_number_six.png)
 
+---
 
----
 ## 7. Cantidad de pasajeros que viajaron en Aerolíneas Argentinas entre el 01/01/2021 y 30/06/2022. Mostrar consulta y Resultado de la query
----
 
 ![Quey 2](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Files/Aerolineas_passenger_quantity_seven.png)
 
 ---
+
 ## 8. Mostrar fecha, hora, código aeropuerto salida, ciudad de salida, código de aeropuerto de arribo, ciudad de arribo, y cantidad de pasajeros de cada vuelo, entre el 01/01/2022 y el 30/06/2022 ordenados por fecha de manera descendiente. Mostrar consulta y Resultado de la query
 
 ![Quey 3](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Files/Movement_By_Type_And_Dates_eight.png)
+
+---
 
 ## 9. Cuales son las 10 aerolíneas que más pasajeros llevaron entre el 01/01/2021 y el 30/06/2022 exceptuando aquellas aerolíneas que no tengan nombre. Mostrar consulta y Visualización
 
 ![Query 4](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Files/Passenger_count_by_airlines_number_nine.png)
 
+---
+
 ## 10. Cuales son las 10 aeronaves más utilizadas entre el 01/01/2021 y el 30/06/22 que despegaron desde la Ciudad autónoma de Buenos Aires o de Buenos Aires,exceptuando aquellas aeronaves que no cuentan con nombre. Mostrar consulta y Visualización
 
 ![Query 5](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Files/Most_Airlplanes_departing_from_Buenos_Aires.png)
 
+---
 
 ## 11. Qué datos externos agregaría en este dataset que mejoraría el análisis de los datos
 
@@ -364,6 +377,7 @@ Para enriquecer el análisis de los datos existentes en el dataset y mejorar la 
 Estos datos pueden ayudar a hacer análisis más robustos y contextuales, lo que resulta en una comprensión más profunda de los factores que influyen en el tráfico aéreo y la experiencia del pasajero.
 
 ---
+
 ## 12. Elabore sus conclusiones y recomendaciones sobre este proyecto.
 
 Este proyecto representa un flujo de trabajo de procesamiento de datos robusto y escalable que integra varias tecnologías líderes en el ámbito de big data para la ingestión, almacenamiento, procesamiento y visualización de datos. Podemos realizar una breve descripción de cada paso y las tecnologías involucradas:
