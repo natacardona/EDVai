@@ -311,30 +311,28 @@ hive>
 ---
 ## 6. Determinar la cantidad de vuelos entre las fechas 01/12/2021 y 31/01/2022. Mostrar consulta y Resultado de la query
 
-[Quey 1:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Flights_count_number_six.png)
-
+![Quey 1:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Flights_count_number_six.png)
 
 
 ---
 ## 7. Cantidad de pasajeros que viajaron en Aerolíneas Argentinas entre el 01/01/2021 y 30/06/2022. Mostrar consulta y Resultado de la query
 ---
 
-[Quey 2](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Passenger_count_by_airlines_number_nine.png)
-
-
+![Quey 2](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Passenger_count_by_airlines_number_nine.png)
 
 ---
 ## 8. Mostrar fecha, hora, código aeropuerto salida, ciudad de salida, código de aeropuerto de arribo, ciudad de arribo, y cantidad de pasajeros de cada vuelo, entre el 01/01/2022 y el 30/06/2022 ordenados por fecha de manera descendiente. Mostrar consulta y Resultado de la query
 
-[Quey 3](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Movement_By_Type_And_Dates_eight.png)
+![Quey 3](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Movement_By_Type_And_Dates_eight.png)
 
 ## 9. Cuales son las 10 aerolíneas que más pasajeros llevaron entre el 01/01/2021 y el 30/06/2022 exceptuando aquellas aerolíneas que no tengan nombre. Mostrar consulta y Visualización
 
-[Query 4](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Passenger_count_by_airlines_number_nine.png)
+![Query 4](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Passenger_count_by_airlines_number_nine.png)
 
 ## 10. Cuales son las 10 aeronaves más utilizadas entre el 01/01/2021 y el 30/06/22 que despegaron desde la Ciudad autónoma de Buenos Aires o de Buenos Aires,exceptuando aquellas aeronaves que no cuentan con nombre. Mostrar consulta y Visualización
 
-[Query 5](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Most_Airlplanes_departing_from_Buenos_Aires.png)
+![Query 5](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Most_Airlplanes_departing_from_Buenos_Aires.png)
+
 
 ## 11. Qué datos externos agregaría en este dataset que mejoraría el análisis de los datos
 ---
