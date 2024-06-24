@@ -2,6 +2,8 @@
 
 ### Aviación Civil
 
+## Requerimiento:
+
 La Administración Nacional de Aviación Civil necesita una serie de informes para elevar al
 ministerio de transporte acerca de los aterrizajes y despegues en todo el territorio Argentino,<b> como puede ser:* </b> cuales aviones son los que más volaron, cuántos pasajeros volaron, ciudades
 de partidas y aterrizajes entre fechas determinadas, etc.
@@ -13,18 +15,19 @@ hacer sus recomendaciones con respecto al estado actual.
 https://datos.gob.ar/lv/dataset/transporte-aterrizajes-despegues-procesados-por-administracionnacional-
 
 #### aviacion-civil-anac
-Listado de detalles de aeropuertos de Argentina:
+#### Listado de detalles de aeropuertos de Argentina:
 https://datos.transporte.gob.ar/dataset/lista-aeropuertos
 
 # Para este punto vamos a utilizar esta arquitectura propuesta:
 
 ![Arquitectura:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Arquitectura.png)
 
+---
 
 ## <p aling="center"><b>TAREAS</b></p>
 ### 1. Hacer ingest de los siguientes files relacionados con transporte aéreo de Argentina :
 
-## Requerimiento:
+
 #### 2021:
 https://edvaibucket.blob.core.windows.net/data-engineer-edvai/2021-informe-ministerio.csv?sp=r&st=2023-11-06T12:59:46Z&se=2025-11-06T20:59:46Z&sv=2022-11-02&sr=b&sig=%2BSs5xIW3qcwmRh5TTmheIY9ZBa9BJC8XQDcI%2FPLRe9Y%3D
 
@@ -36,19 +39,14 @@ https://edvaibucket.blob.core.windows.net/data-engineer-edvai/aeropuertos_detall
 
 ## Solución:
 
-[Ingest.sh](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/ingest.sh)
+[Ingest](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/ingest.sh)
 
-### 2. Crear 2 tablas en el datawarehouse, una para los vuelos realizados en 2021 y 2022
-(2021-informe-ministerio.csv y 202206-informe-ministerio) y otra tabla para el detalle de
-los aeropuertos (aeropuertos_detalle.csv)
-
-## Requerimiento:
+### 2. Crear 2 tablas en el datawarehouse, una para los vuelos realizados en 2021 y 2022(2021-informe-ministerio.csv y 202206-informe-ministerio) y otra tabla para el detalle delos aeropuertos (aeropuertos_detalle.csv)
 
 ![Schema Tabla 1:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Schema_Vuelos.png)
 
 ![Schema Tabla 2:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Schema_Detalle_Aeropuertos.png)
 
-## Solución:
 Creamos las siguientes tablas en Hive 
 
 ```
@@ -89,14 +87,18 @@ CREATE TABLE detalle_aeropuertos (
     provincia STRING,
 );
 ```
+
 ```
 hive> create database fligthsdb;
 OK
 ```
+
 ```
 hive> use fligthsdb;
 OK
 Time taken: 0.045 seconds
+```
+
 ```
 hive> 
     > CREATE TABLE vuelos (
@@ -114,6 +116,7 @@ hive>
 OK
 Time taken: 1.728 seconds
 hive> 
+```
 ```
 hive> CREATE TABLE detalle_aeropuertos (
     >     aeropuerto STRING,
@@ -142,21 +145,58 @@ OK
 Time taken: 0.411 seconds
 hive> 
 ```
-## 3. Realizar un proceso automático orquestado por airflow que ingeste los archivos
-## Requerimiento:
-previamente mencionados entre las fechas 01/01/2021 y 30/06/2022 en las dos
-columnas creadas.
+---
+## 3. Realizar un proceso automático orquestado por airflow que ingeste los archivos previamente mencionados entre las fechas 01/01/2021 y 30/06/2022 en las dos columnas creadas.
+
 Los archivos 202206-informe-ministerio.csv y 202206-informe-ministerio.csv → en la
 tabla aeropuerto_tabla
 El archivo aeropuertos_detalle.csv → en la tabla aeropuerto_detalles_tabla
 
-## Solución:
+[DAG:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/dag_first_exercise.py)
+
 ![Orchestador:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Images/Airflow_Dag_Graph_Excersise_One.png)
 
+---
+## 4. Realizar las siguientes transformaciones en los pipelines de datos:
+  
+   ## Solución:
 
-## 5. Mostrar mediante una impresión de pantalla, que los tipos de campos de las tablas
-sean los solicitados en el datawarehouse (ej: fecha date, aeronave string, pasajeros
-integer, etc.)
+[Transform_airports:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/transform_airports.py)
+
+[transform_flights:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/transform_flights.py)
+
+   - Eliminar la columna `inhab` ya que no se utilizará para el análisis.
+   - Eliminar la columna `fir` ya que no se utilizará para el análisis.
+
+    ```
+    df_airport = df_airport_details.drop('inhab', 'fir')
+    df_airports_fixed = df_airport.fillna({"distancia_ref": 0})
+    ``
+   - Eliminar la columna `calidad del dato` ya que no se utilizará para el análisis.
+    ```
+    # Eliminar columnas que no se utilizarán para el análisis
+    ```
+    columns_to_drop = ["Calidad dato"]
+    df_union = df_union.drop(*columns_to_drop)
+    ```
+   - Filtrar los vuelos internacionales, ya que solamente se analizarán los vuelos domésticos.
+    ```
+    # Filtrar los vuelos domésticos 'Clasificación Vuelo')
+    df_domestic = df_union.filter(col('Clasificación Vuelo') == 'Doméstico')
+    ```
+   - En el campo `pasajeros`, si se encuentran campos en Null, convertirlos en 0 (cero).
+    ```
+   # Convertir valores NULL en 0 en las columnas 'Pasajeros' y 'distancia_ref'
+    df_domestic = df_domestic.withColumn('Pasajeros', when(col('Pasajeros').isNull(), 0).otherwise(col('Pasajeros').cast("int")))
+    ```
+   - En el campo `distancia_ref`, si se encuentran campos en Null, convertirlos en 0 (cero).
+     ```
+    df_airports_fixed = df_airport.fillna({"distancia_ref": 0})
+     ```
+---
+
+## 5. Mostrar mediante una impresión de pantalla, que los tipos de campos de las tablas sean los solicitados en el datawarehouse (ej: fecha date, aeronave string, pasajeros integer, etc.)
+
 ```
 hive> describe formatted vuelos;
 OK
