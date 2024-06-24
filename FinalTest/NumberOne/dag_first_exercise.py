@@ -32,17 +32,17 @@ with DAG(
         bash_command="/usr/bin/sh /home/hadoop/scripts/ingest.sh",
     )
     
-    with TaskGroup("transform_load") as transform_load:
-        transform_1 = BashOperator(
+    with TaskGroup("transform_flighs_and_airports") as transform_flights_airports:
+        transform_flights = BashOperator(
             task_id='transform_vuelos',
             bash_command='ssh hadoop@172.17.0.2 /home/hadoop/spark/bin/spark-submit --files /home/hadoop/hive/conf/hive-site.xml /home/hadoop/scripts/transform_flights.py',
         )
-        transform_2 = BashOperator(
+        transform_airports = BashOperator(
             task_id='transform_aeropuertos',
             bash_command='ssh hadoop@172.17.0.2 /home/hadoop/spark/bin/spark-submit --files /home/hadoop/hive/conf/hive-site.xml /home/hadoop/scripts/transform_airports.py',
         )
             
-    start >> ingest >> transform_load >> end
+    start >> ingest >> transform_flights_airports >> end
 
 if __name__ == "__main__":
     dag.cli()
