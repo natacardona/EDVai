@@ -14,24 +14,27 @@ file_2022 = 'hdfs://172.17.0.2:9000/ingest/202206-informe-ministerio.csv'
 df_2021 = spark.read.option("delimiter", ";").option("header", "true").csv(file_2021)
 df_2022 = spark.read.option("delimiter", ";").option("header", "true").csv(file_2022)
 
+df_2021 = df_2021.drop('Calidad dato')
+df_2021_domestic_filter = df_2021.filter(df_2021["Clasificación Vuelo"] == "Domestico")
+df_2021_domestic_filter = df_2021_domestic_filter.fillna({"Pasajeros": 0})
+
+df_2022 = df_2022.drop('Calidad dato')
+df_2022_filtered_domestic = df_2022.filter(df_2022["Clasificación Vuelo"] == "Doméstico")
+df_2022_filtered_domestic = df_2022_filtered_domestic.withColumn("Clasificación Vuelo", regexp_replace("Clasificación Vuelo", "Doméstico", "Domestico"))
+df_2022_filtered_domestic = df_2022_filtered_domestic.fillna({"Pasajeros": 0})
+
 # Mostrar las columnas de cada archivo
 print("Columnas del archivo 2021:")
 df_2021.printSchema()
 print("\nColumnas del archivo 2022:")
 df_2022.printSchema()
 
-# Unir los datos de 2021 y 2022
-df_union = df_2021.unionByName(df_2022)
-
-# Eliminar columnas que no se utilizarán para el análisis
-columns_to_drop = ["Calidad dato"]
-df_union = df_union.drop(*columns_to_drop)
-
-# Filtrar los vuelos domésticos 'Clasificación Vuelo')
-df_domestic = df_union.filter(col('Clasificación Vuelo') == 'Doméstico')
+# Filtrar los vuelos domésticos (asumiendo que hay una columna 'Clasificación Vuelo')
+df_domestic = df_2021_domestic_filter.union(df_2022_filtered_domestic)
 
 # Convertir valores NULL en 0 en las columnas 'Pasajeros' y 'distancia_ref'
-df_domestic = df_domestic.withColumn('Pasajeros', when(col('Pasajeros').isNull(), 0).otherwise(col('Pasajeros').cast("int")))
+df_domestic = df_domestic.withColumn("Clasificación Vuelo", regexp_replace("Clasificación Vuelo", "Doméstico", "Domestico"))
+df_domestic = df_domestic.fillna({"Pasajeros": 0})
 
 # Mostrar tipos de datos de las columnas
 print("Tipos de datos de las columnas:")
@@ -41,7 +44,7 @@ df_domestic.printSchema()
 print("Primeros 5 registros del DataFrame transformado:")
 df_domestic.show(5)
 
-# Renombrar columnas para que coincidan con la estructura del schema destino
+# Renombrar columnas para que coincidan con la estructura de la base de datos MySQL
 df_domestic = df_domestic.withColumnRenamed('Fecha', 'fecha') \
                          .withColumnRenamed('Hora UTC', 'horaUTC') \
                          .withColumnRenamed('Clase de Vuelo (todos los vuelos)', 'clase_de_vuelo') \
@@ -67,7 +70,7 @@ df_domestic = df_domestic.select(
     col('origen_destino').cast("string"),
     col('aerolinea_nombre').cast("string"),
     col('aeronave').cast("string"),
-    col('pasajeros').cast("int")
+    col('pasajeros').cast("int"),
 )
 
 # Mostrar tipos de datos de las columnas
