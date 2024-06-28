@@ -107,23 +107,32 @@ hc.sql("insert into car_rental_db.car_rental_analytics select * from tmp_car_ana
 ```
 
 ## 4. Realizar un proceso automático en Airflow que orqueste los pipelines creados en los puntos anteriores. Crear dos tareas:
+
+- ![](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberOne/Files/Airflow_Dag_Graph_Excersise_One.png)
 - a. Un DAG padre que ingente los archivos y luego llame al DAG hijo
 
 [dag_second_exercise_child.py](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberTwo/dag_second_exercise_child.py)
 
+
 - b. Un DAG hijo que procese la información y la cargue en Hive
 [dag_second_exercise_child.py](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberTwo/dag_second_exercise_parent.py)
 
+
 ## 5. Por medio de consultas SQL al data-warehouse, mostrar:
+
 - a. Cantidad de alquileres de autos, teniendo en cuenta sólo los vehículos
 ecológicos (fuelType hibrido o eléctrico) y con un rating de al menos 4.
 
 - b. los 5 estados con menor cantidad de alquileres (crear visualización)
+
 - c. los 10 modelos (junto con su marca) de autos más rentados (crear visualización)
+
 - d. Mostrar por año, cuántos alquileres se hicieron, teniendo en cuenta automóviles
 fabricados desde 2010 a 2015
+
 - e. las 5 ciudades con más alquileres de vehículos ecológicos (fuelType hibrido o
 electrico)
+
 - f. el promedio de reviews, segmentando por tipo de combustible
 
 ## 6. Elabore sus conclusiones y recomendaciones sobre este proyecto.
