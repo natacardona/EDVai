@@ -59,7 +59,7 @@ Exportar los datos transformados a un destino como BigQuery o Cloud Storage.
 
 
 # Arquitectura:
-<p> El gerente de Analitca te pide realizar una arquitectura hecha en GCP que contemple el uso de
+<p> El gerente de Analitica te pide realizar una arquitectura hecha en GCP que contemple el uso de
 esta herramienta ya que le parece muy fácil de usar y una interfaz visual que ayuda a sus
 desarrolladores ya que no necesitan conocer ningún lenguaje de desarrollo.
 Esta arquitectura debería contemplar las siguiente etapas:

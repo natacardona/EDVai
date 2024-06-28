@@ -25,6 +25,7 @@ listos para ser visualizados y responder las preguntas de negocio.</p>
 | year              | integer  |
 
 ## 2. Crear script para el ingest de estos dos files
+
 - https://edvaibucket.blob.core.windows.net/data-engineer-edvai/CarRentalData.csv?sp=rst=2023-11-06T12:52:39Z&se=2025-11-06T20:52:39Z&sv=2022-11-02&sr=c&sig=J4Ddi2c7Ep23OhQLPisbYaerlH472iigPwc1%2FkG80EM%3D
 
 - https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/georef-united-states-of-america-state/exports/csv?lang=en&timezone=America%2FArgentina%2FBuenos_Aires&use_labels=true&delimiter=%3B
@@ -35,26 +36,88 @@ listos para ser visualizados y responder las preguntas de negocio.</p>
 wget -P ruta_destino -O ruta_destino/nombre_archivo.csv ruta_al_archivo
 ```
 
-## Visualizaciones: https://lookerstudio.google.com/reporting/e6e42751-24ac-4677-abe8-73cbea34f08e
+## Solución:
+Se creo un archivo que de ingest que descarga los archivos a un directorio de landing y luego mueve los archivos al HDFS.
+
+[ingest_rents.sh](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberTwo/ingest_rents.sh)
+
 
 ## 3. Crear un script para tomar el archivo desde HDFS y hacer las siguientes transformaciones:
 
+Para este punto se creo el siguiente script: [transform_car_rentals.py](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberTwo/transform_car_rentals.py)
+
 - En donde sea necesario, modificar los nombres de las columnas. Evitar espacios
 y puntos (reemplazar por _ ). Evitar nombres de columna largos.
+
+- El código para cambiar nombres de columnas se encuentra en las líneas que usan `withColumnRenamed`, que ajustan varios nombres para evitar caracteres no deseados y acortar los nombres.
+
+```
+df_rental_locations = df_rental_locations.withColumnRenamed("fuelType", "fueltype") ...
+df_georef_location = df_georef_location.withColumnRenamed("Geo Point", "geo_point") ...
+
+```
+
 - Redondear los float de ‘rating’ y castear a int.
+- Esta transformación se realiza seleccionando la columna `rating`, redondeando y cambiando el tipo a entero.
+
+```
+df_rental_locations = df_rental_locations.select(
+    round(col("rating"), 1).cast("int").alias("rating"), ...
+)
+```
+
 - Joinear ambos files
-- Eliminar los registros con rating nulo
+- El join entre los dataframes `df_rental_locations` y `df_georef_location` se basa en la columna 'state_name'.
+
+```
+df_inner_joined_rental_location = df_rental_locations.join(df_georef_location, ...
+
+```
+
+- Eliminar los registros con rating nulo.
+- Los registros con rating igual a cero son filtrados justo después del join.
+
+
+```
+df_filtered_rating_diff_than_zero = df_inner_joined_rental_location.filter(df_inner_joined_rental_location["rating"] != 0)
+
+```
+
 - Cambiar mayúsculas por minúsculas en ‘fuelType’
+- Esta conversión de mayúsculas a minúsculas se asegura en el renombramiento inicial de las columnas para la consistencia.
+
+```
+df_rental_locations = df_rental_locations.withColumnRenamed("fuelType", "fueltype")
+
+```
+
 - Excluir el estado Texas
+- Los registros para el estado de Texas se excluyen en el filtro final antes de la inserción en Hive.
+
+```
+df_filtered_texas = df_filtered_rating_diff_than_zero.filter(df_filtered_rating_diff_than_zero["state_name"] != "TX")
+
+```
+
 Finalmente insertar en Hive el resultado
+
+- Los datos filtrados se insertan en la tabla Hive usando la función `sql` del contexto Hive.
+```
+hc.sql("insert into car_rental_db.car_rental_analytics select * from tmp_car_analytics_data;")
+```
 
 ## 4. Realizar un proceso automático en Airflow que orqueste los pipelines creados en los puntos anteriores. Crear dos tareas:
 - a. Un DAG padre que ingente los archivos y luego llame al DAG hijo
+
+[dag_second_exercise_child.py](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberTwo/dag_second_exercise_child.py)
+
 - b. Un DAG hijo que procese la información y la cargue en Hive
+[dag_second_exercise_child.py](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberTwo/dag_second_exercise_parent.py)
 
 ## 5. Por medio de consultas SQL al data-warehouse, mostrar:
 - a. Cantidad de alquileres de autos, teniendo en cuenta sólo los vehículos
 ecológicos (fuelType hibrido o eléctrico) y con un rating de al menos 4.
+
 - b. los 5 estados con menor cantidad de alquileres (crear visualización)
 - c. los 10 modelos (junto con su marca) de autos más rentados (crear visualización)
 - d. Mostrar por año, cuántos alquileres se hicieron, teniendo en cuenta automóviles
@@ -66,3 +129,5 @@ electrico)
 ## 6. Elabore sus conclusiones y recomendaciones sobre este proyecto.
 
 ## 7. Proponer una arquitectura alternativa para este proceso ya sea con herramientas on premise o cloud (Si aplica)
+
+## Visualizaciones: https://lookerstudio.google.com/reporting/e6e42751-24ac-4677-abe8-73cbea34f08e
