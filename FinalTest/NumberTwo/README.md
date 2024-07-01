@@ -127,17 +127,29 @@ hc.sql("insert into car_rental_db.car_rental_analytics select * from tmp_car_ana
 - a. Cantidad de alquileres de autos, teniendo en cuenta sólo los vehículos
 ecológicos (fuelType hibrido o eléctrico) y con un rating de al menos 4.
 
-- b. los 5 estados con menor cantidad de alquileres (crear visualización)
+![Qty_rented_cars:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberTwo/Files/Qty_rented_cars.png)
 
-- c. los 10 modelos (junto con su marca) de autos más rentados (crear visualización)
+- b. Los 5 estados con menor cantidad de alquileres (crear visualización)
+
+![Five_Top_State_less_rents:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberTwo/Files/Five_Top_State_less_rents.png)
+
+- c. Los 10 modelos (junto con su marca) de autos más rentados (crear visualización)
+
+![Most_Top_10_rented_cars:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberTwo/Files/Most_Top_10_rented_cars.png)
 
 - d. Mostrar por año, cuántos alquileres se hicieron, teniendo en cuenta automóviles
 fabricados desde 2010 a 2015
 
-- e. las 5 ciudades con más alquileres de vehículos ecológicos (fuelType hibrido o
+![Rents_By_year:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberTwo/Files/Rents_By_year.png)
+
+- e. Las 5 ciudades con más alquileres de vehículos ecológicos (fuelType hibrido o
 electrico)
 
-- f. el promedio de reviews, segmentando por tipo de combustible
+![Top_5_cities_renting_hybrid_and_electric_cars:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberTwo/Files/Top_5_cities_renting_hybrid_and_electric_cars.png)
+
+- f. El promedio de reviews, segmentando por tipo de combustible
+
+![Average_of_reviews_depends_of_fuel_type:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberTwo/Files/Average_of_reviews_depends_of_fuel_type.png)
 
 ## 6. Elabore sus conclusiones y recomendaciones sobre este proyecto.
 
@@ -150,6 +162,9 @@ electrico)
 - Popularidad de Tesla: Tesla se destaca como una de las marcas más populares entre los arrendatarios, con varios de sus modelos en el top 10 de los más alquilados, indicando una tendencia hacia vehículos eléctricos y de alto rendimiento.
 
 - Preferencia por Vehículos Más Nuevos: La distribución de alquileres por año de fabricación muestra una preferencia por vehículos más nuevos, especialmente los fabricados entre 2010 y 2015, con un incremento notable en los alquileres de los modelos más recientes de este rango.
+
+- Tendencia de Alquileres por Año de Fabricación:
+Los datos muestran una clara tendencia ascendente en la cantidad de alquileres de vehículos fabricados entre 2010 y 2015. Los modelos más recientes dentro de este rango, especialmente los de 2015, son los más alquilados, con 532 alquileres en comparación con los 144 de los modelos de 2010.
 
 - Valoración de Autos por Tipo de Combustible: Las reseñas de los clientes indican que los autos híbridos son los más valorados, seguidos de cerca por los de gasolina y eléctricos. Los vehículos diésel tienen menos reseñas y una valoración promedio más baja.
 
