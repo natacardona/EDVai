@@ -194,4 +194,6 @@ Tomando como base Apache Airflow podemos usarlo para la orquestación de flujos 
 
 Utilizar herramientas de visualización de datos como Tableau o Power BI para crear dashboards interactivos y obtener insights de los datos procesados.
 
+---
+
 ## Visualizaciones: https://lookerstudio.google.com/reporting/e6e42751-24ac-4677-abe8-73cbea34f08e
