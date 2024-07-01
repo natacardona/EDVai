@@ -137,6 +137,20 @@ electrico)
 
 ## 6. Elabore sus conclusiones y recomendaciones sobre este proyecto.
 
+- Aceptación de Autos Híbridos y Eléctricos: los autos híbridos y eléctricos tienen una buena aceptación entre los clientes, reflejada en el número de alquileres y las calificaciones promedio.
+
+- Demanda en Ciudades Específicas: San Diego y Las Vegas lideran la demanda de vehículos ecológicos, lo que sugiere que estos mercados están más inclinados hacia la sostenibilidad.
+
+- Oportunidades de Marketing: Algunos estados muestran una baja actividad de alquiler, lo que podría ser una oportunidad para implementar estrategias de marketing específicas.
+
+- Popularidad de Tesla: Tesla se destaca como una de las marcas más populares entre los arrendatarios, con varios de sus modelos en el top 10 de los más alquilados, indicando una tendencia hacia vehículos eléctricos y de alto rendimiento.
+
+- Preferencia por Vehículos Más Nuevos: La distribución de alquileres por año de fabricación muestra una preferencia por vehículos más nuevos, especialmente los fabricados entre 2010 y 2015, con un incremento notable en los alquileres de los modelos más recientes de este rango.
+
+- Valoración de Autos por Tipo de Combustible: Las reseñas de los clientes indican que los autos híbridos son los más valorados, seguidos de cerca por los de gasolina y eléctricos. Los vehículos diésel tienen menos reseñas y una valoración promedio más baja.
+
 ## 7. Proponer una arquitectura alternativa para este proceso ya sea con herramientas on premise o cloud (Si aplica)
+
+
 
 ## Visualizaciones: https://lookerstudio.google.com/reporting/e6e42751-24ac-4677-abe8-73cbea34f08e
