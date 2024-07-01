@@ -399,7 +399,7 @@ El proyecto combina tecnologías de vanguardia para construir un pipeline de dat
 
 ## 13. Proponer una arquitectura alternativa para este proceso ya sea con herramientas on premise o cloud (Sí aplica)
 
-una arquitectura alternativa que utilice tanto soluciones on-premise como en la nube, centrándonos en maximizar la eficiencia, escalabilidad y la capacidad de manejar grandes volúmenes de datos de manera efectiva. Se podría proponer una propuesta que incorpore tecnologías de vanguardia tanto en la nube como en entornos locales:
+Una arquitectura alternativa que utilice tanto soluciones on-premise como en la nube, centrándonos en maximizar la eficiencia, escalabilidad y la capacidad de manejar grandes volúmenes de datos de manera efectiva. Se podría proponer una propuesta que incorpore tecnologías de vanguardia tanto en la nube como en entornos locales:
 
 Arquitectura Híbrida en la Nube y On-Premise
 

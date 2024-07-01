@@ -8,6 +8,10 @@ automóvil, valoración de cada alquiler, etc.
 Como Data Engineer debe crear y automatizar el pipeline para tener como resultado los datos
 listos para ser visualizados y responder las preguntas de negocio.</p>
 
+# Para este punto vamos a utilizar esta arquitectura propuesta:
+
+![Arquitectura:](https://github.com/natacardona/EDVai/blob/main/FinalTest/NumberTwo/Files/Arquitectura.png)
+
 ## 1. Crear en hive una database car_rental_db y dentro una tabla llamada car_rental_analytics, con estos campos:
 
 | Campo             | Tipo     |
@@ -151,6 +155,28 @@ electrico)
 
 ## 7. Proponer una arquitectura alternativa para este proceso ya sea con herramientas on premise o cloud (Si aplica)
 
+### Ingesta de Datos
 
+Se podría utilizar un sistema de ingesta de datos como Apache NiFi o AWS Glue para recopilar datos desde múltiples fuentes (archivos CSV, bases de datos, APIs, etc.). Esto permite una ingesta de datos más flexible y escalable.
+
+### Almacenamiento de Datos Crudos
+
+Se podrían almacenar los datos crudos en un Data Lake utilizando Amazon S3 o Google Cloud Storage en lugar de HDFS. Esto proporciona un almacenamiento más económico y escalable, con integración nativa con otros servicios en la nube.
+
+### Procesamiento de Datos
+
+Seguiríamos usando Apache Spark para el procesamiento de datos, pero desplegado sobre un clúster manejado como Databricks o Google Cloud Dataproc. Esto simplifica la administración del clúster y proporciona mayor escalabilidad y resiliencia.
+
+### Almacenamiento de Datos Procesados
+
+Podemos utilizar una base de datos optimizada para análisis como Amazon Redshift, Google BigQuery o Snowflake para almacenar los datos procesados. Estas soluciones proporcionan un rendimiento de consulta más rápido y una mejor optimización para grandes volúmenes de datos.
+
+### Orquestación de Procesos
+
+Tomando como base Apache Airflow podemos usarlo para la orquestación de flujos de trabajo y la programación de trabajos de procesamiento de datos. Ya que Airflow permite una mejor gestión y monitoreo de las tareas de ETL.
+
+### Visualización y Análisis
+
+Utilizar herramientas de visualización de datos como Tableau o Power BI para crear dashboards interactivos y obtener insights de los datos procesados.
 
 ## Visualizaciones: https://lookerstudio.google.com/reporting/e6e42751-24ac-4677-abe8-73cbea34f08e
